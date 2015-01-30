@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require_relative './bddb_client.rb'
+
+if ARGV.count < 3
+  puts "Usage: ./bddb-cli [ADDRESS] [PORT] [COMMAND] [[DATUM]]"
+  exit 1
+end
+
+$bddb = BigDatumDBClient.new(ARGV[0], ARGV[1])
+
+case ARGV[2].downcase
+when 'get'
+  puts $bddb.get
+when 'set'
+  puts $bddb.set ARGV[3]
+end

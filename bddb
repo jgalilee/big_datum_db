@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+$big_datum = nil
+
+if ARGV.count != 2
+  puts "Usage: ./bddb [ADDRESS] [PORT]"
+  exit 1
+end
+
+server = TCPServer.open(ARGV[0], ARGV[1])
+
+puts "Big Datum DB running on #{ARGV[0]} #{ARGV[1]}..."
+
+loop do
+  client = server.accept
+  request = client.gets.chomp
+
+  case request[0..2].downcase
+  when 'set'
+    $big_datum = request[4..-1]
+    client.puts "OK"
+  when 'get'
+    client.puts $big_datum
+  end
+
+  client.close
+end
