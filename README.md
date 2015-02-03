@@ -31,6 +31,6 @@ In-memory database for your big datum.
 ## Caveats
 
 1. Your Big Datum must fit in memory.
-1. Your Big Datum bust be a single line of text.
+1. Your Big Datum must be a single line of text.
 1. You can only have one connection at a time.
 1. Web-scale.
